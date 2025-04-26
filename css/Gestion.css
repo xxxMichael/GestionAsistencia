@@ -1,0 +1,35 @@
+
+     table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        /* Estilo específico para Hora Entrada */
+        td#hora_entrada_mnn, td#hora_entrada_tarde {
+            background-color: #c6e48b; /* Verde pastel */
+        }
+        /* Estilo específico para Hora Salida */
+        td#hora_salida_mnn, td#hora_salida_tarde {
+            background-color: #fca5a5; /* Rojo pastel */
+        }
+
+        button {
+            display: block;
+            width: 100px;
+            padding: 10px;
+            margin: 0 auto;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }

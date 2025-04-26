@@ -1,0 +1,43 @@
+body {
+    background-color: #2e302f;
+}
+
+.custom-navbar {
+    background-color: #007bff;
+}
+
+.custom-navbar .navbar-brand,
+.custom-navbar .nav-link {
+    color: #fff !important;
+}
+
+.custom-navbar .nav-link:hover {
+    color: #ffc107 !important;
+}
+
+.custom-header {
+    background: url('imges/uta-banner.jpg') no-repeat center center;
+    background-size: cover;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-header h1 {
+    color: #fff;
+    text-align: center;
+    padding: 70px 0;
+}
+
+.content-section {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    padding: 20px;
+}
+
+.custom-footer {
+    background-color: #007bff;
+    color: #fff;
+}
