@@ -43,9 +43,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['email'] = $email;
         $_SESSION['role'] = $user['rol'];
         if ($user['rol'] == "administrador") {
-            include "../views/plantilla.php";
+            include "./views/Layouts/plantilla.php";
         } else {
-            include "../views/interfaces/GestionInOut.php.php";
+            include "./views/Asistencia/GestionInOut.php";
 
         }
         echo json_encode(['success' => true, 'role' => $user['rol']]);
