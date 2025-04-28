@@ -1,10 +1,12 @@
 <?php
 
-require_once '../app/Services/Report/ReporteGeneralEmpleadoService.php';
-require_once '../app/Services/Report/ReportePorCedulaService.php';
-require_once '../app/Services/Report/ReporteMensualService.php';
-require_once '../app/Services/Report/ReporteSemanalService.php';
-require_once '../app/Database/conexion.php';
+require_once '../Services/Report/ReporteGeneralEmpleadoService.php';
+
+//require_once '../app/Services/Report/ReporteGeneralEmpleadoService.php';
+require_once '../Services/Report/ReportePorCedulaService.php';
+require_once '../Services/Report/ReporteMensualService.php';
+require_once '../Services/Report/ReporteSemanalService.php';
+require_once '../Database/conexion.php';
 
 class ReportController
 {
@@ -43,3 +45,6 @@ class ReportController
         ]);
     }
 }
+
+$re =new ReportController();
+$re->reporteGeneral();
