@@ -51,7 +51,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['rol'])) {
         }
 
         .custom-header {
-            background: url('imges/uta-banner.jpg') no-repeat center center;
+            /* background: url('imges/uta-banner.jpg') no-repeat center center; */
             background-size: cover;
             height: 200px;
             display: flex;
@@ -189,7 +189,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['rol'])) {
                 method: 'POST',
                 body: formData
             };
-            fetch('models/obtener_horas.php', fetchOptions)
+            fetch('./app/Models/obtener_horas.php', fetchOptions)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Error al obtener las horas de entrada y salida');
@@ -233,7 +233,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['rol'])) {
                 body: formData
             };
 
-            fetch('models/consulta_asistencia.php', fetchOptions)
+            fetch('./app/Models/consulta_asistencia.php', fetchOptions)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Error al obtener las horas de entrada y salida');
@@ -384,7 +384,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['rol'])) {
         }
 
         function enviarRegistro(tipoRegistro, hora, cedula) {
-            const urlServidor = 'models/guardar_asistencia.php';
+            const urlServidor = './app/Models/guardar_asistencia.php';
             return new Promise((resolve, reject) => {
 
                 // Datos a enviar
@@ -585,7 +585,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['rol'])) {
         }
 
         function enviarmulta(valor, tipomulta, cedula) {
-            const url = 'models/multa.php';
+            const url = './app/Models/multa.php';
             const data = {
                 valor: valor,
                 tipomulta: tipomulta,
