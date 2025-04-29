@@ -45,6 +45,3 @@ class ReportController
         ]);
     }
 }
-
-$re =new ReportController();
-$re->reporteGeneral();
