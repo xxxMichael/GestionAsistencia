@@ -14,19 +14,19 @@ switch ($method) {
         break;
 
     case 'POST':
-        $data = $_POST;
+        $data = json_decode(file_get_contents("php://input"), true);
         $result = $repo->insert($data);
         echo json_encode($result);
         break;
 
     case 'PUT':
-        parse_str(file_get_contents("php://input"), $data);
-        $result = $repo->update($data);
+        $data = json_decode(file_get_contents("php://input"), true);
+        $result = $repo->update( $data);
         echo json_encode($result);
         break;
 
     case 'DELETE':
-                parse_str(file_get_contents("php://input"), $data);
+        $data = json_decode(file_get_contents("php://input"), true);
         $cedula = $data['cedula'];
         $result = $repo->delete($cedula);
         echo json_encode($result);
