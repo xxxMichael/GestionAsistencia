@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['logout'])) {
                 </li>
                 <li class="nav-item"><a class="nav-link" href="index.php?action=reporteMensualG">Reporte Mensual</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="index.php?action=reporteGeneralG">Reporte General</a>
+                <li class="nav-item"><a class="nav-link" href="index.php?action=Reportes/reporteGeneralG">Reporte General</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="./views/interfaces/reporteE.php" target="_blank">Reporte Empleados</a>
