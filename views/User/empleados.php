@@ -6,7 +6,7 @@
     <title>Empleados</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./Public/css/style.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
@@ -95,14 +95,17 @@
     </div>
     <script type="text/javascript">
         var url;
+        var method; // Variable para almacenar el método HTTP (POST, PUT, DELETE)
 
         function newUser() {
             $('#dlg').modal('show');
             $('#fm')[0].reset();
             $('#fm').find('input[name="emp_cedula"]').prop('readonly', false);
             $('#validationErrors').addClass('d-none').text('');
-            url = 'models/guardar.php';
+            url = './app/Controllers/EmpleadoController.php';
+            method = 'POST'; // Para crear nuevo usuario
         }
+
         function editUser() {
             var row = $('#dg tbody').find('tr.selected');
             if (row.length > 0) {
@@ -119,7 +122,7 @@
                 var hora_entrada_tarde = jornadaVespertina[0];
                 var hora_salida_tarde = jornadaVespertina[1];
 
-                $('#fm').find('input[name="emp_cedula"]').val(cedula).prop('readonly', true); 
+                $('#fm').find('input[name="emp_cedula"]').val(cedula).prop('readonly', true);
                 $('#fm').find('input[name="emp_nombre"]').val(nombre);
                 $('#fm').find('input[name="emp_apellido"]').val(apellido);
                 $('#fm').find('input[name="emp_telefono"]').val(telefono);
@@ -130,7 +133,8 @@
                 $('#fm').find('input[name="emp_hora_salida_tarde"]').val(hora_salida_tarde);
 
                 $('#validationErrors').addClass('d-none').text('');
-                url = 'models/editar.php?cedula=' + cedula;
+                url = './app/Controllers/EmpleadoController.php';
+                method = 'PUT'; // Para actualizar usuario
                 $('#dlg').modal('show');
             }
         }
@@ -173,31 +177,47 @@
         }
 
         function saveUser(event) {
+            event.preventDefault();
+
             if (!validateForm()) {
-                return; // Detener la ejecución si el formulario no es válido
+                return;
             }
+
+            const formData = {
+                emp_cedula: $('input[name="emp_cedula"]').val(),
+                emp_nombre: $('input[name="emp_nombre"]').val(),
+                emp_apellido: $('input[name="emp_apellido"]').val(),
+                emp_telefono: $('input[name="emp_telefono"]').val(),
+                emp_direccion: $('input[name="emp_direccion"]').val(),
+                emp_hora_entrada_mnn: $('input[name="emp_hora_entrada_mnn"]').val(),
+                emp_hora_salida_mnn: $('input[name="emp_hora_salida_mnn"]').val(),
+                emp_hora_entrada_tarde: $('input[name="emp_hora_entrada_tarde"]').val(),
+                emp_hora_salida_tarde: $('input[name="emp_hora_salida_tarde"]').val()
+            };
 
             $.ajax({
                 url: url,
-                type: 'POST',
-                data: $('#fm').serialize(),
+                type: method,
+                data: JSON.stringify(formData),
+                contentType: 'application/json',
                 success: function (result) {
                     try {
-                        var parsedResult = JSON.parse(result);
-                        if (parsedResult.success) {
-                            $('#dlg').modal('hide'); // Cerrar el modal
-                            cargarTabla(); // Actualizar la tabla
+                        if (result.success) {
+                            $('#dlg').modal('hide');
+                            cargarTabla();
                         } else {
-                            alert(parsedResult.message);
+                            alert(result.message || 'Error al procesar la solicitud');
                         }
                     } catch (e) {
                         console.error("Error al parsear la respuesta del servidor: ", e);
                         console.error("Respuesta del servidor: ", result);
+                        alert('Error al procesar la respuesta del servidor');
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.error("Error en la solicitud: " + textStatus + " - " + errorThrown);
                     console.error("Respuesta del servidor: ", jqXHR.responseText);
+                    alert('Error en la comunicación con el servidor');
                 }
             });
         }
@@ -208,18 +228,27 @@
                 var cedula = row.find('td:eq(0)').text();
                 if (confirm('¿Está seguro que desea eliminar a este empleado?')) {
                     $.ajax({
-                        url: 'models/borrar.php',
-                        type: 'POST',
-                        data: { cedula: cedula },
+                        url: './app/Controllers/EmpleadoController.php',
+                        type: 'DELETE',
+                        data: JSON.stringify({ cedula: cedula }),
+                        contentType: 'application/json',
                         success: function (result) {
-                            if (result.success) {
-                                cargarTabla();
-                            } else {
-                                alert(result.errorMsg);
+                            try {
+                                if (result.success) {
+                                    cargarTabla();
+                                } else {
+                                    alert(result.message || 'Error al eliminar el empleado');
+                                }
+                            } catch (e) {
+                                console.error("Error al parsear la respuesta del servidor: ", e);
+                                console.error("Respuesta del servidor: ", result);
+                                alert('Error al procesar la respuesta del servidor');
                             }
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
-                            alert('Error en la solicitud: ' + textStatus + ' - ' + errorThrown);
+                            console.error("Error en la solicitud: " + textStatus + " - " + errorThrown);
+                            console.error("Respuesta del servidor: ", jqXHR.responseText);
+                            alert('Error en la comunicación con el servidor');
                         }
                     });
                 }
@@ -228,7 +257,8 @@
 
         function cargarTabla() {
             $.ajax({
-                url: 'models/acceder.php',
+                url: './app/Controllers/EmpleadoController.php',
+                type: 'GET',
                 dataType: 'json',
                 success: function (data) {
                     var tbody = $('#dg tbody');
@@ -250,6 +280,7 @@
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.log("Error en la solicitud: " + textStatus + " - " + errorThrown);
+                    alert('Error al cargar los datos de empleados');
                 }
             });
         }
@@ -262,9 +293,9 @@
                 $(this).toggleClass('selected').siblings().removeClass('selected');
             });
 
-            $('input[name="emp_telefono"]').on('input', function() {
+            $('input[name="emp_telefono"]').on('input', function () {
                 this.value = this.value.replace(/[^0-9]/g, '');
-            });  // Enlazar el evento de guardado del formulario
+            });
         });
     </script>
 </body>

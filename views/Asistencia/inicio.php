@@ -1,6 +1,6 @@
 <?php 
     $conn = 
-    include_once "models/conexion.php";
+    include_once "./app/Database/conexion.php";
     $conn = new conexion();
     $conn->conectar();
 ?>
