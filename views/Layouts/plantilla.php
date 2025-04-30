@@ -38,14 +38,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['logout'])) {
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="index.php?action=inicio">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" href="index.php?action=User/empleados">Empleados</a></li>
-                <li class="nav-item"><a class="nav-link" href="index.php?action=reporteSemanalG">Reporte Semanal</a>
+                <li class="nav-item"><a class="nav-link" href="index.php?action=Reportes/reporteSemanalG">Reporte Semanal</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="index.php?action=reporteMensualG">Reporte Mensual</a>
+                <li class="nav-item"><a class="nav-link" href="index.php?action=Reportes/reporteMensualG">Reporte Mensual</a>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="index.php?action=Reportes/reporteGeneralG">Reporte General</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./views/interfaces/reporteE.php" target="_blank">Reporte Empleados</a>
+                <a class="nav-link" href="#" onclick="enviarReporteAll()" target="_blank">Reporte Empleados</a>
                 </li>
 
                 <div>
@@ -68,6 +68,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['logout'])) {
         </section>
     </main>
 
+    <form id="formReporteAll" action="app/controllers/reportDispatcher.php" method="post" target="_blank" style="display:none;">
+    <input type="hidden" name="tipo" value="all">
+</form>
+
+<script>
+function enviarReporteAll() {
+    window.close(); // Cerrar la ventana actual
+    document.getElementById('formReporteAll').submit();
+}
+</script>
     <footer class="custom-footer bg-dark text-white text-center py-4 mt-5">
         <div class="container">
             <div class="row">
