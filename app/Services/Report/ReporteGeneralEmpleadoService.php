@@ -22,7 +22,7 @@ class ReporteGeneralEmpleadoService implements IReportService {
         $pdf = new FPDF();
         $pdf->AddPage();
         $pdf->SetFont('Arial', 'B', 14);
-        $pdf->Cell(0, 10, 'Reporte General de Asistencia', 0, 1, 'C');
+        $pdf->Cell(0, 10, 'Reporte General de Asistencia Todos', 0, 1, 'C');
       //$pdf->Image('../../../Public/images/eeasa.png', 10, 10, 20);
         $pdf->Ln(20);
         $pdf->SetFont('Arial', 'B', 10);

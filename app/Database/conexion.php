@@ -3,9 +3,9 @@ class conexion
 {
     public function conectar()
     {
-        $servername = "localhost:3307";
+        $servername = "localhost";
         $username = "root";
-        $password = "davidgiler21";
+        $password = "root";
         $dbName = "visualfinal";
 
         $conn = mysqli_connect($servername, $username, $password, $dbName);
