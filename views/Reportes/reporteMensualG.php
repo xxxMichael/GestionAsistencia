@@ -1,7 +1,7 @@
 <section class="content-section">
         <h2>Generar Reporte General</h2>
         <form action="app/controllers/reportDispatcher.php" method="post" target="reporteFrame" onsubmit="return validarFecha();">
-        <input type="hidden" name="tipo" value="mensual"> <              <div class="form-group">
+        <input type="hidden" name="tipo" value="mensual">               <div class="form-group">
                 <label for="cedula">Cédula:</label>
                 <input type="text" id="cedula" name="cedula" class="form-control" required>
             </div>
