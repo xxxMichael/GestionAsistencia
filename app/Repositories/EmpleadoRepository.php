@@ -36,8 +36,8 @@ class EmpleadosRepository {
         $horaEntradaTarde = $data['emp_hora_entrada_tarde'];
         $horaSalidaTarde = $data['emp_hora_salida_tarde'];
 
-        $sqlEmpleado = "INSERT INTO empleados (cedula, nombre, apellido, telefono, direccion, hora_entrada_mnn, hora_salida_mnn, hora_entrada_tarde, hora_salida_tarde)
-                        VALUES ('$cedula', '$nombre', '$apellido', '$telefono', '$direccion', '$horaEntradaMnn', '$horaSalidaMnn', '$horaEntradaTarde', '$horaSalidaTarde')";
+        $sqlEmpleado = "INSERT INTO empleados (cedula, nombre, apellido, telefono, direccion, hora_entrada_mnn, hora_salida_mnn, hora_entrada_tarde, hora_salida_tarde,sueldo)
+                        VALUES ('$cedula', '$nombre', '$apellido', '$telefono', '$direccion', '$horaEntradaMnn', '$horaSalidaMnn', '$horaEntradaTarde', '$horaSalidaTarde',450)";
 
         $sqlUsuario = "INSERT INTO usuarios (usuario, contrasenia, rol) VALUES ('$cedula', '$cedula', 'empleado')";
 
