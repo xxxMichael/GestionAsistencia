@@ -1,5 +1,5 @@
 <?php
-
+// Servicio para generar reportes mensuales de asistencia de empleados.
 require_once('C:\xampp\htdocs\GestionAsistencia\app\libraries\fpdf186\fpdf.php');
 require_once('C:\xampp\htdocs\GestionAsistencia\app\Services\Report\IReportService.php');
 
