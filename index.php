@@ -1,7 +1,6 @@
 <?php
-    require_once "controllers/controller.php";
-    require_once "models/model.php";
+    require_once "./app/Controllers/Controller.php";
+    require_once "./app/Models/model.php";
     $mvc = new MvcController();
     $mvc -> plantilla();
-
 ?>
